@@ -15,14 +15,15 @@ import {
    TouchableOpacity,
    Button,
    Animated,
-   Slider,
 } from 'react-native'
 
 var base64 = require('base-64');
 
+var accountSid = 'ACc1fece9f19d8f394351120f0ac28360b'; 
+var authToken = 'fb58c8a754c370bfe9e73f649b5c7e61'; 
 var info = require('./info.json');
 // Request page
-export default class RequestContainer extends Component {
+export default class RequestContaineriOS extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,9 +44,6 @@ export default class RequestContainer extends Component {
                     {this.renderTemperature(0)}
                 </View>
                 <View>
-	            	<Slider
-	         			onValueChange={(value) => this.setState({text: (this.state.temperature++) + ''})} 
-	         			/>
 				</View>
                 <View style = {Style.buttonContainer}>
                    <Button
