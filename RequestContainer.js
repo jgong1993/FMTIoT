@@ -21,6 +21,7 @@ import {
 var base64 = require('base-64');
 
 var info = require('./info.json');
+var data = require('./test.json');
 // Request page
 export default class RequestContainer extends Component {
   constructor(props) {
@@ -44,8 +45,18 @@ export default class RequestContainer extends Component {
                 <View style={Style.insidetemperature}>
                     {this.renderTemperature(0)}
                 </View>
+                <View style={ScrollStyle.diffBox}>
+                   <Text style={ScrollStyle.topdiff}>
+                       {'Difference'}
+                   </Text>
+                  <Text style={ScrollStyle.diff}>
+                      { 
+                         this.getNewTemp(Number.parseInt(this.state.otherValue) - Number.parseInt(data[0]["tempF"]))+ '°F'
+                      }
+                  </Text>
+                </View>
                 <View style={ScrollStyle.wordBox}>
-                <Text style={ScrollStyle.words}>
+                  <Text style={ScrollStyle.words}>
                       {"I want to change the temperature to: " + this.state.otherValue + '°F'}
                   </Text>
                 </View>
@@ -83,9 +94,20 @@ export default class RequestContainer extends Component {
          </View>
    )}
 
+   getNewTemp(x){
+     var n = Number.parseInt(this.state.otherValue) - Number.parseInt(data[0]["tempF"]);
+     if(n > 0){
+      return "+" + n;
+    }else if(n == 0){
+      return n;
+    }
+    else{
+      return n;
+    }
+   }
+
 
    renderTemperature(t) {
-       var data = require('./test.json');
        let views = [];
        views.push(<View style={Style.temperatureRow} key={data[t]["_id"]} >
                      <Text style={Style.temperatureButtonText}>
