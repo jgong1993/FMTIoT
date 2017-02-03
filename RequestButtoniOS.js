@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Style from './src/StyleiOS';
+import StyleiOS from './src/StyleiOS';
 import {
    View,
    Text,
@@ -9,7 +9,7 @@ import {
 
 export default RequestButton = (props) => {
    return (
-      <View style = {Style.buttonContainer}>
+      <View style = {StyleiOS.buttonContainer}>
           <Button
             color= '#C3270B'
             title="Request To Change Room Temperature"

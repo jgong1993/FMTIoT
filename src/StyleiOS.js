@@ -18,7 +18,7 @@ var StyleiOS = StyleSheet.create({
     },
 
     subDisplay: {
-        flex: 1,
+        flex: .1,
         alignItems: 'center',
         justifyContent: 'center'   
     },
@@ -27,6 +27,7 @@ var StyleiOS = StyleSheet.create({
     pickerContiner: {
         color: 'white',
         backgroundColor: '#23AFC9',
+        flex: .5
     },
 
     // Temperature Label Section

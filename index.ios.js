@@ -1,53 +1,89 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
+
+// Style Sheets
+import Style from './src/StyleiOS';
+import NavigationStyle from './src/NavigationStyleiOS';
+
+// External parts to the page
+import MainPageiOS from './MainPageiOS'; // Main PAge
+import RequestContaineriOS from './RequestContaineriOS'; // Request page
+
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  Picker,
+  Button,
+  Navigator,
+  Alert,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default class IotTemperature extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator
+          initialRoute={{id: 'Home', name: 'Home'}}
+          renderScene={this.renderScene}
+          ref={(nav) => { navigator = nav; }}
+          navigationBar = {
+               <Navigator.NavigationBar
+                  navigationStyles={Navigator.NavigationBar.StylesIOS}
+                  routeMapper = { NavigationBarRouteMapper } />
+            }/>
     );
+  }
+  renderScene(route, navigator) {    
+    if (route.name == 'Home') {
+      return (
+        <MainPageiOS
+          navigator={navigator} />
+      );
+    }
+    if (route.name == 'Request Change') {
+      return (
+        <RequestContaineriOS
+          room = {route.room} 
+          navigator={navigator} />
+      );
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+var NavigationBarRouteMapper = {
+   LeftButton(route, navigator, index, navState) {
+      // if(index > 0) {
+      //    return (
+      //       <View style={RequestStyle.LeftButtonBox}>
+      //       <TouchableOpacity
+      //          onPress = {() => { if (index > 0) { navigator.pop() } }}>
+      //          <Text style={ RequestStyle.leftButton }>
+      //             {'Back'} 
+      //          </Text>
+      //       </TouchableOpacity>
+      //       </View>
+      //    )
+      // }
+      // else { return null }
+   },
+   RightButton(route, navigator, index, navState) {
+   },
+   Title(route, navigator, index, navState) {
+    if(route.title == 'Request'){
+      return (
+         <Text style = { NavigationStyle.title2 }>
+            {route.title + ': ' + route.room} 
+         </Text> 
+      )
+    }else{
+      return (
+         <Text style = { NavigationStyle.title }>
+            {route.title} 
+         </Text>
+      )
+    }
+   },
+}
 
 AppRegistry.registerComponent('IotTemperature', () => IotTemperature);

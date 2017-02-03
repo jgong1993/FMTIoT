@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Style Sheets
-import Style from './src/StyleiOS';
+import StyleiOS from './src/StyleiOS';
 // External parts
 
 // Components
@@ -13,13 +13,10 @@ import {
    ScrollView,
    TouchableOpacity,
    Button,
-   Animated,
 } from 'react-native'
 
-var base64 = require('base-64');
+var base64 =  require('./testBase');
 
-var accountSid = 'ACc1fece9f19d8f394351120f0ac28360b'; 
-var authToken = 'fb58c8a754c370bfe9e73f649b5c7e61'; 
 var info = require('./info.json');
 // Request page
 export default class RequestContaineriOS extends Component {
@@ -33,20 +30,20 @@ export default class RequestContaineriOS extends Component {
    render() {
       var _scrollView: ScrollView;
       return (
-         <View style={Style.rootContainer}>
+         <View style={StyleiOS.rootContainer}>
 
-            <View style={Style.displayContainer}></View>
+            <View style={StyleiOS.displayContainer}></View>
 
-            <View style={Style.tempContainer}>
-                <View><Text style={Style.currentTemperatureHeaderText}>{"Current Temperature"}</Text></View>
-                <View style={Style.insidetemperature}>
+            <View style={StyleiOS.tempContainer}>
+                <View><Text style={StyleiOS.currentTemperatureHeaderText}>{"Current Temperature"}</Text></View>
+                <View style={StyleiOS.insidetemperature}>
                     {this.renderTemperature(0)}
                 </View>
                 <View>
 				</View>
-                <View style = {Style.buttonContainer}>
+                <View style = {StyleiOS.buttonContainer}>
                    <Button
-                    style = {Style.buttonContainer}
+                    style = {StyleiOS.buttonContainer}
                     color = '#C3270B'
                     title = {this.state.text}
                     accessibilityLabel="Send"
@@ -70,8 +67,8 @@ export default class RequestContaineriOS extends Component {
    renderTemperature(t) {
        var data = require('./test.json');
        let views = [];
-       views.push(<View style={Style.temperatureRow} key={data[t]["_id"]} >
-                     <Text style={Style.temperatureButtonText}>
+       views.push(<View style={StyleiOS.temperatureRow} key={data[t]["_id"]} >
+                     <Text style={StyleiOS.temperatureButtonText}>
                       {data[t]["tempF"] + "         " + data[t]["tempC"]}
                      </Text>
                   </View>)
