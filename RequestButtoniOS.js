@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Style from './src/Style';
+import Style from './src/StyleiOS';
 import {
    View,
    Text,

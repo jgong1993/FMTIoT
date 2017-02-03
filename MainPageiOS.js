@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Style from './src/StyleiOS';
 
 // External parts to the page
-import RequestButton from './RequestButton'
+import RequestButton from './RequestButtoniOS'
 
 // Components
 import { 

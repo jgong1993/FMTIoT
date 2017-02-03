@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
 // Style Sheets
-import Style from './src/Style';
-import ScrollStyle from './src/ScrollStyle';
+import Style from './src/StyleiOS';
 // External parts
 
 // Components
