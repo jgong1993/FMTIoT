@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "58862e124345ebc2c214ca18",
+    "index": 0,
+    "guid": "64819437-1bd2-422f-aee8-d4db1e7ee7d7",
+    "isActive": false,
+    "balance": "$2,633.07",
+    "picture": "http://placehold.it/32x32",
+    "age": 32,
+    "eyeColor": "green",
+    "name": "De Pree Coneference Room [S]",
+    "gender": "male",
+    "company": "INSURITY",
+    "email": "zimmermantodd@insurity.com",
+    "phone": "+1 (950) 470-3719",
+    "tempC" : "24°C",
+    "tempF" : "79°F"
+  },
+  {
+    "_id": "58862e124345ebc2c214ca18",
+    "index": 0,
+    "guid": "64819437-1bd2-422f-aee8-d4db1e7ee7d7",
+    "isActive": false,
+    "balance": "$2,633.07",
+    "picture": "http://placehold.it/32x32",
+    "age": 32,
+    "eyeColor": "green",
+    "name": "Seaside Conference Room [M]",
+    "gender": "male",
+    "company": "INSURITY",
+    "email": "zimmermantodd@insurity.com",
+    "phone": "+1 (950) 470-3719",
+    "tempC" : "21°C",
+    "tempF" : "72°F"
+  },
+  {
+    "_id": "58862e124345ebc2c214ca18",
+    "index": 0,
+    "guid": "64819437-1bd2-422f-aee8-d4db1e7ee7d7",
+    "isActive": false,
+    "balance": "$2,633.07",
+    "picture": "http://placehold.it/32x32",
+    "age": 32,
+    "eyeColor": "green",
+    "name": "Swamis Coneference Room [L]",
+    "gender": "male",
+    "company": "INSURITY",
+    "email": "zimmermantodd@insurity.com",
+    "phone": "+1 (950) 470-3719",
+    "tempC" : "66°C",
+    "tempF" : "142°F"
+  }
+]

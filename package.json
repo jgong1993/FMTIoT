@@ -1,0 +1,27 @@
+{
+  "name": "IotTemperature",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "15.4.2",
+    "react-native": "0.40.0",
+    "react-native-communications": "^2.2.1",
+    "react-native-dropdownalert": "^2.4.0",
+    "react-native-send-sms": "^1.0.1",
+    "react-native-sms-android": "^0.4.1",
+    "sendbird": "^3.0.18"
+  },
+  "devDependencies": {
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "18.1.0",
+    "react-test-renderer": "15.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
