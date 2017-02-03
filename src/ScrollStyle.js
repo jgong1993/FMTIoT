@@ -2,13 +2,15 @@ import { StyleSheet } from 'react-native';
 
 var ScrollStyle = StyleSheet.create({
 
-    container: {
-        flex: .1
+    words: {
+        color: 'white',
+        fontSize: 19
     },
-
-    numbers: {
-        fontSize: 25
-    },
+    wordBox: {
+    	alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 15
+    }
 
 });
 

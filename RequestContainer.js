@@ -28,6 +28,8 @@ export default class RequestContainer extends Component {
     this.state = {
       text: 'Send alert to that one guy',
       temperature: 0,
+      message: '',
+      otherValue: 79
     };
 }
    render() {
@@ -42,11 +44,23 @@ export default class RequestContainer extends Component {
                 <View style={Style.insidetemperature}>
                     {this.renderTemperature(0)}
                 </View>
+                <View style={ScrollStyle.wordBox}>
+                <Text style={ScrollStyle.words}>
+                      {"I want to change the temperature to: " + this.state.otherValue + '°F'}
+                  </Text>
+                </View>
                 <View>
-	            	<Slider
-	         			onValueChange={(value) => this.setState({text: (this.state.temperature++) + ''})} 
-	         			/>
-				</View>
+  	            	<Slider
+                   maximumValue = {100}
+                   minimumValue = {50}
+                   value = {79}
+                   step = {1}
+  	         			 onValueChange={(value) => this.setState({
+                      message: 'Can you please set the temperature to ' + value + '°F',
+                      otherValue : value,
+                   })} 
+  	         			/>
+				        </View>
                 <View style = {Style.buttonContainer}>
                    <Button
                     style = {Style.buttonContainer}
@@ -85,8 +99,8 @@ export default class RequestContainer extends Component {
     var http = new XMLHttpRequest();
     var authInfo = info[0]["accountSid"] +":"+ info[0]["authToken"];
     authInfo = base64.encode(authInfo);
-    var url = "https://api.twilio.com/2010-04-01/Accounts/"+accountSid+"/Messages.json";
-    var params = "To=3233172423&From=+18187228141&Body=It is so hot right now";
+    var url = "https://api.twilio.com/2010-04-01/Accounts/"+info[0]["accountSid"]+"/Messages.json";
+    var params = "To=3233172423&From=+18187228141&Body=" + this.state.message;
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http.setRequestHeader("Content-Length", "50");
