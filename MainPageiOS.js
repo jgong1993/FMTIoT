@@ -5,7 +5,7 @@ import StyleiOS from './src/StyleiOS';
 
 // External parts to the page
 import RequestButtoniOS from './RequestButtoniOS';
-
+import SimplePicker from 'react-native-simple-picker';
 // Components
 import { 
   View, 
@@ -13,17 +13,16 @@ import {
   Navigator, 
   PickerIOS,
   Button,
-  Alert
+  AlertIOS
 } from 'react-native';
 
-const options = ['Option1', 'Option2', 'Option3'];
-const label = ['Banana', 'Apple', 'Pear'];
+const options = ['De Pree Coneference Room [S]', 'Seaside Conference Room [M]', 'Swamis Coneference Room [L]'];
+const label = ['De Pree Coneference Room [S]', 'Seaside Conference Room [M]', 'Swamis Coneference Room [L]'];
 
-import SimplePicker from 'react-native-simple-picker';
 // First Page
 export default class MainPageiOS extends Component {
   state = {
-    room: 'Choose a Room',
+    room: '[Choose a Room - Press Here]',
 
   };
   constructor() {
@@ -40,9 +39,21 @@ export default class MainPageiOS extends Component {
         </View>
 
         <View style={StyleiOS.tempContainer}>
+          <Button
+            title = {this.state.room}
+            color = 'white'
+            onPress = {()=> {
+                  this.refs.picker.show();
+            } }
+          />
           <SimplePicker
               ref={'picker'}
               options={options}
+              labels={label}
+              itemStyle={{
+                fontSize:25,
+                fontWeight: 'bold'
+              }}
               onSubmit={(option)=>{
                 this.setState({
                   room: option,
@@ -57,6 +68,8 @@ export default class MainPageiOS extends Component {
           <View style={StyleiOS.outsidetemperature}>
               {this.renderTemperature(1)}
           </View>
+
+          
           <RequestButtoniOS requestChange = {this.requestChange} />
         </View>
 
@@ -64,12 +77,14 @@ export default class MainPageiOS extends Component {
   );}
  
   requestChange = () => {
-    if(this.state.room != 'Choose a Room'){
+    if(this.state.room != '[Choosse a Room - Press Here]'){
       this.props.navigator.push({
        name: 'Request Change',
        title: 'Request',
        room: this.state.room
       });
+    }else{
+      AlertIOS.alert( 'Please Choose a Room', 'Nothing is chosen right now.' );
     }
   }
   

@@ -34,7 +34,7 @@ export default class IotTemperature extends Component {
             }/>
     );
   }
-  renderScene(route, navigator) {    
+  renderScene(route, navigator) {  
     if (route.name == 'Home') {
       return (
         <MainPageiOS

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 var StyleiOS = StyleSheet.create({
 
@@ -44,13 +44,13 @@ var StyleiOS = StyleSheet.create({
     },
 
     outsideTemperatureHeaderText: {
-        fontSize: 35,
+        fontSize: 30,
         color: 'white',
         textAlign: 'center',
     },
 
     outsidetemperature: {
-        flex: .5,
+        flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
     },
@@ -73,11 +73,26 @@ var StyleiOS = StyleSheet.create({
     },
 
     buttonContainer: {
-      marginTop: 100,
+      marginTop: 200,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-   },
+    },
+    buttonContainer1: {
+      height: 35,
+      marginLeft: ((Dimensions.get('window').width)-(Dimensions.get('window').width)/1.5)/2,
+      width: (Dimensions.get('window').width)/1.5,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#C3270B',
+      borderRadius: 5,
+      position: 'absolute',
+      bottom:0,
+    },
+    requestButton:{
+        color: 'white',
+    }
 
 });
 
