@@ -5,6 +5,7 @@ import Style from './src/Style';
 
 // External parts to the page
 import RequestButton from './RequestButton'
+import TemperatureCharts from './TemperatureCharts'
 
 // Components
 import { 
@@ -18,19 +19,27 @@ import {
 
 // First Page
 export default class MainPage extends Component {
+  watchID = (null : ?number);
   state = {
     room: 'Choose a Room',
-  };
+    insideTempF: '',
+    insideTempC: '',
+    outsideTempF: '',
+    outsideTempC: ''
+      };
   constructor() {
       super()
+      this.renderTemperaturePhoton();
+      this.renderTemperatureOutisde();
   }
+  
   render() {
     return (
       <View style={Style.rootContainer}>
 
         <View style={Style.displayContainer}>
             <View style={Style.subDisplay}>
-                  <Text style={Style.headerText}> FMT Consultants Temperature Thingy </Text>
+                  <Text style={Style.headerText}> Smart Room </Text>
             </View>
         </View>
 
@@ -43,14 +52,25 @@ export default class MainPage extends Component {
              <Picker.Item label="Seaside Conference Room [M]" value="Seaside Conference Room [M]" />
              <Picker.Item label="Swamis Coneference Room [L]" value="Swamis Coneference Room [L]" />
           </Picker>
-          <View><Text style={Style.currentTemperatureHeaderText}>{"Current Temperature"}</Text></View>
+
+          <View>
+             <Text style={Style.currentTemperatureHeaderText}>
+                {"Current Temperature"}
+             </Text>
+          </View>
+
           <View style={Style.insidetemperature}>
-              {this.renderTemperature(0)}
+             <Text style={Style.temperatureText}> 
+                {this.state.insideTempF + "        " + this.state.insideTempC}
+             </Text>
+             <Text style={Style.outsideTemperatureHeaderText}>
+                {"Outside Temperature"}
+             </Text>
+              <Text style={Style.temperatureText}> 
+                  {this.state.outsideTempF + "        " + this.state.outsideTempC} 
+             </Text>
           </View>
-          <View><Text style={Style.outsideTemperatureHeaderText}>{"Outside Temperature"}</Text></View>
-          <View style={Style.outsidetemperature}>
-              {this.renderTemperature(1)}
-          </View>
+          <TemperatureCharts />
           <RequestButton requestChange = {this.requestChange} />
         </View>
 
@@ -58,7 +78,7 @@ export default class MainPage extends Component {
   );}
  
   requestChange = () => {
-    if(this.state.room != 'Choose a Room'){
+    if(this.state.room != 'Choose a sRoom'){
       this.props.navigator.push({
        name: 'Request Change',
        title: 'Request',
@@ -66,18 +86,34 @@ export default class MainPage extends Component {
       });
     }
   }
-  
- // Need to place this function elsewhere
- renderTemperature(t) {
-    var data = require('./test.json');
-    let views = [];
-    views.push(<View style={Style.temperatureRow} key={data[t]["_id"]} >
-                  <Text style={Style.temperatureButtonText}>
-                   {data[t]["tempF"] + "         " + data[t]["tempC"]}
-                  </Text>
-               </View>)
-    return views;
- }
+
+  renderTemperaturePhoton() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = (e) => {
+      if (request.readyState == 4 ) {
+    
+          this.setState({insideTempF : JSON.parse(request.response)["TempF"]+"°F"});
+          this.setState({insideTempC : JSON.parse(request.response)["TempC"]+"°C"})
+        
+      }
+    };
+    request.open('GET', 'http://fmtiotapi.azurewebsites.net/api/room/getlatest');
+    request.send();
+  }
+  renderTemperatureOutisde() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = (e) => {
+      if (request.readyState == 4 ) {
+        var tF = (JSON.parse(request.response)["main"]["temp"])*(9/5)-459.67;
+        var tC = (JSON.parse(request.response)["main"]["temp"])-273.15;
+        this.setState({outsideTempF : Math.round(tF)+"°F"});
+        this.setState({outsideTempC : Math.round(tC)+"°C"});
+      }
+    };
+    request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=Carlsbad&APPID=bbf44c86869ad7545bb2f3484ced8359');
+    request.send();
+  }
+
 }
 
 module.exports = MainPage;

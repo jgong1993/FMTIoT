@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 var Style = StyleSheet.create({
 
@@ -11,17 +11,17 @@ var Style = StyleSheet.create({
         backgroundColor: '#ea665b'
     },
 
-    headerText: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'white',
-        fontFamily: 'Roboto'
-    },
-
     subDisplay: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'   
+    },
+
+    headerText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
+        fontFamily: 'Roboto'
     },
 
     // Choose a room section
@@ -37,22 +37,28 @@ var Style = StyleSheet.create({
     },
 
     currentTemperatureHeaderText: {
-        fontSize: 30,
+        fontSize: 20,
         color: 'white',
         fontFamily: 'Roboto',
         textAlign: 'center',
-        marginTop: 20
+        marginTop: 20,
     },
-
+    currentTemperatureHeaderText2: {
+        fontSize: 20,
+        color: 'white',
+        fontFamily: 'Roboto',
+        textAlign: 'center',
+        marginTop: 10,
+    },
     outsideTemperatureHeaderText: {
-        fontSize: 35,
+        marginTop: 10,
+        fontSize: 20,
         color: 'white',
         fontFamily: 'Roboto',
         textAlign: 'center',
     },
 
     outsidetemperature: {
-        flex: .5,
         flexDirection: 'column',
         alignItems: 'center',
     },
@@ -76,11 +82,37 @@ var Style = StyleSheet.create({
     },
 
     buttonContainer: {
-      marginTop: 100,
+      marginTop: 20,
+      marginBottom: 20,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
    },
+    buttonContainer2: {
+      marginTop: 55,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+    temperatureButtonLeft: {
+      marginTop: 20,
+      marginRight: 6,
+      width: (Dimensions.get("window").width/2.2)
+   },
+   temperatureButtonRight: {
+      marginTop: 20,
+      marginLeft: 6,
+      width: (Dimensions.get("window").width/2.2)
+   },
+   temperatureText: {
+      fontSize: 35,
+      color: 'white',
+   },
+   temperatureButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'center'
+   }
 
 });
 
