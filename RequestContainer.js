@@ -5,12 +5,13 @@ import Style from './src/Style';
 import ScrollStyle from './src/ScrollStyle';
 // External parts
 import Swiper from 'react-native-swiper';
+import Picker from 'react-native-picker';
+import LineGauge from 'react-native-line-gauge'
 // Components
 import {
    View,
    Text,
    StyleSheet,
-   Picker,
    Alert,
    TouchableOpacity,
    Button,
@@ -21,7 +22,7 @@ var base64 = require('base-64');
 
 var info = require('./info.json');
 var data = require('./test.json');
-
+let pickerData = [];
 var RouteStack = {
   app: {
     component: RequestContainer 
@@ -31,7 +32,7 @@ var RouteStack = {
 
 // Request page
 export default class RequestContainer extends Component {
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -42,9 +43,9 @@ export default class RequestContainer extends Component {
       insideTempC: '',
       outsideTempF: '',
       outsideTempC: '',
-      max: 100,
+      max: 95,
       min: 50,
-      initVal: ''
+      initVal: 0
     };
     this.renderTemperaturePhoton();
     this.renderTemperatureOutisde();
@@ -86,69 +87,29 @@ export default class RequestContainer extends Component {
                    </Text>
                   <Text style={ScrollStyle.diff}>
                       { 
-                         this.state.valueToSet
+                         this.state.initVal + '°F'
                       }
                   </Text>
                 </View>
 
                 {/* Slider with the Temperature Range */}
                 <View>
-                  <Slider
-                   maximumValue = {this.state.max}
-                   minimumValue = {this.state.min}
-                   value = {75}
-                   step = {1}
-                   onValueChange={(value) => this.setState({
-                      message: 'Can you please set the temperature to ' + value + '°F',
-                      valueToSet : value + '°F',
-                   })} 
-                  />
-                  {/*  */}
-                  <View style={ScrollStyle.rangeTextBox}>
-                     <Text style={ScrollStyle.rangeText}> {"Temperature Range"} </Text>
-                  </View>
 
-                  <View style = {Style.temperatureButtonContainer}>
-                    <View style = {Style.temperatureButtonLeft}>
+                <LineGauge min={parseInt(this.state.min)} max={parseInt(this.state.max)} value={parseInt(this.state.initVal)} onChange={
+                  (value)=> this.setState({
+                    valueToSet : value + '°F',
+                    initVal : value,
+                    message: 'Can you please set the temperature to ' + value + '°F'})}
+                />
+
+                  <View style = {Style.buttonContainer2}>
                       <Button
                         color= '#81b3e1'
-                        title= {"▲ Minimum to " + (this.state.min+1)}
-                        onPress = {() => this.setState({
-                            min: this.state.min + 1,
-                        })}
+                        title= {"Change temperature range"}
+                        onPress = {()=>   pickerData = this.initializePicker() }
                       />
-                    </View>
-                    <View style = {Style.temperatureButtonRight}>
-                     <Button
-                        color= '#6d1717'
-                        title= {"▲ Maximum to " + (this.state.max+1)}
-                        onPress = {() => this.setState({
-                            max: this.state.max + 1,
-                        })}
-                      />
-                    </View>
                   </View>
 
-                  <View style = {Style.temperatureButtonContainer}>
-                    <View style = {Style.temperatureButtonLeft}>
-                      <Button
-                        color= '#81b3e1'
-                        title= {"▼ Minimum to " + (this.state.min-1)}
-                        onPress = {() => this.setState({
-                            min: this.state.min - 1,
-                        })}
-                      />
-                    </View>
-                    <View style = {Style.temperatureButtonRight}>
-                     <Button
-                        color= '#6d1717'
-                        title= {"▼ Maximum to " + (this.state.max-1)}
-                        onPress = {() => this.setState({
-                            max: this.state.max - 1,
-                        })}
-                      />
-                    </View>
-                  </View>
                 </View>
 
 
@@ -162,11 +123,11 @@ export default class RequestContainer extends Component {
                       () => {
                         Alert.alert(
                           'Confirmation',
-                          "Are you sure you want to send this message?",
+                          "Are you sure you want to set the temperatuer to " + this.state.valueToSet,
                           [
                            {text: 'Cancel'},  
                            {text: 'Send', onPress: () => {
-                            //this.sendMessage(),
+                            this.sendMessage(),
                             this.setState({
                               text: "Message has been sent to that one guy!"
                             })
@@ -186,7 +147,6 @@ export default class RequestContainer extends Component {
 
 
    sendMessage(){
-    this.popup.alert(1);
     var http = new XMLHttpRequest();
     var authInfo = info[0]["accountSid"] +":"+ info[0]["authToken"];
     authInfo = base64.encode(authInfo);
@@ -216,12 +176,14 @@ export default class RequestContainer extends Component {
           this.setState({insideTempF : JSON.parse(request.response)["TempF"]+"°F"});
           this.setState({insideTempC : JSON.parse(request.response)["TempC"]+"°C"});
           this.setState({valueToSet: JSON.parse(request.response)["TempF"]+"°F"});
+          this.setState({initVal: JSON.parse(request.response)["TempF"]});
         }
       }
   };
     request.open('GET', 'http://fmtiotapi.azurewebsites.net/api/room/getlatest');
     request.send();
   }
+
   renderTemperatureOutisde() {
     var request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
@@ -236,4 +198,107 @@ export default class RequestContainer extends Component {
     request.send();
   }
 
+  initializePicker(){
+    var tempMin = this.state.min;
+    var tempMax = this.state.max;
+    var minAr = [];
+    var maxAr = [];
+    for(var i = 0; i < 30; i++){
+      minAr[i] = 50+i;
+      maxAr[i] = 65+i;
+    }
+     pickerData = [
+        {
+            Min: minAr
+        },
+        {
+            Max: maxAr
+        },
+    
+    ];
+    Picker.init({
+        pickerData: pickerData,
+        selectedValue: [this.state.min, this.state.max],
+        pickerTitleText: "Please select range",
+        onPickerConfirm: data => {
+            if(tempMax < tempMin){
+               Alert.alert("Error with your choice", "The max temperature is less than your min temperature");
+            }else{
+              this.state.min = tempMin;
+              this.state.max = tempMax;
+              //alert(tempMin + "  " + tempMax + "  " + (tempMin+tempMax) + "      " + (parseInt(tempMin)+parseInt(tempMax))/2)
+              this.state.initVal = (parseInt(tempMin)+parseInt(tempMax))/2;
+              this.forceUpdate();
+            }
+        },
+        onPickerCancel: data => {
+        },
+        onPickerSelect: data => {
+            if(data[0] == "Max"){
+              tempMax = data[1];
+            }else{
+              tempMin = data[1];
+            }
+        }
+    });
+    Picker.show();
+    return pickerData;
+  }
+
 }
+
+
+
+       // <View style = {Style.temperatureButtonContainer}>
+       //              <View style = {Style.temperatureButtonLeft}>
+       //                <Button
+       //                  color= '#81b3e1'
+       //                  title= {"▲ Minimum to " + (this.state.min+1)}
+       //                  onPress = {() => this.setState({
+       //                      min: this.state.min + 1,
+       //                  })}
+       //                />
+       //              </View>
+       //              <View style = {Style.temperatureButtonRight}>
+       //               <Button
+       //                  color= '#6d1717'
+       //                  title= {"▲ Maximum to " + (this.state.max+1)}
+       //                  onPress = {() => this.setState({
+       //                      max: this.state.max + 1,
+       //                  })}
+       //                />
+       //              </View>
+       //            </View>
+
+       //            <View style = {Style.temperatureButtonContainer}>
+       //              <View style = {Style.temperatureButtonLeft}>
+       //                <Button
+       //                  color= '#81b3e1'
+       //                  title= {"▼ Minimum to " + (this.state.min-1)}
+       //                  onPress = {() => this.setState({
+       //                      min: this.state.min - 1,
+       //                  })}
+       //                />
+       //              </View>
+       //              <View style = {Style.temperatureButtonRight}>
+       //               <Button
+       //                  color= '#6d1717'
+       //                  title= {"▼ Maximum to " + (this.state.max-1)}
+       //                  onPress = {() => this.setState({
+       //                      max: this.state.max - 1,
+       //                  })}
+       //                />
+       //              </View>
+       //            </View>
+
+                  //        <Slider
+                  //  maximumValue = {this.state.max}
+                  //  minimumValue = {this.state.min}
+                  //  value = {75}
+                  //  step = {1}
+                  //  onValueChange={(value) => this.setState({
+                  //     message: 'Can you please set the temperature to ' + value + '°F',
+                  //     valueToSet : value + '°F',
+                  //     initVal: value
+                  //  })} 
+                  // />
