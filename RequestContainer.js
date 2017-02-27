@@ -207,15 +207,7 @@ export default class RequestContainer extends Component {
       minAr[i] = 50+i;
       maxAr[i] = 65+i;
     }
-     pickerData = [
-        {
-            Min: minAr
-        },
-        {
-            Max: maxAr
-        },
-    
-    ];
+    pickerData = [{Min: minAr}, {Max: maxAr}];
     Picker.init({
         pickerData: pickerData,
         selectedValue: [this.state.min, this.state.max],
@@ -230,8 +222,6 @@ export default class RequestContainer extends Component {
               this.state.initVal = (parseInt(tempMin)+parseInt(tempMax))/2;
               this.forceUpdate();
             }
-        },
-        onPickerCancel: data => {
         },
         onPickerSelect: data => {
             if(data[0] == "Max"){

@@ -14,7 +14,8 @@ import {
   Navigator, 
   Picker,
   Button,
-  Alert
+  Alert,
+  TouchableHighlight
 } from 'react-native';
 
 // First Page
@@ -25,12 +26,13 @@ export default class MainPage extends Component {
     insideTempF: '',
     insideTempC: '',
     outsideTempF: '',
-    outsideTempC: ''
+    outsideTempC: '',
+    city: ''
       };
   constructor() {
       super()
-      this.renderTemperaturePhoton();
       this.renderTemperatureOutisde();
+      this.renderTemperaturePhoton();
   }
   
   render() {
@@ -44,15 +46,24 @@ export default class MainPage extends Component {
         </View>
 
         <View style={Style.tempContainer}>
-          <Picker style={Style.pickerContiner}
-                  selectedValue={this.state.room}
-                  onValueChange={(room_var) => this.setState({room: room_var})}>
-             <Picker.Item label="Choose a Room" value="none" />
-             <Picker.Item label="De Pree Coneference Room [S]" value="De Pree Coneference Room [S]" />
-             <Picker.Item label="Seaside Conference Room [M]" value="Seaside Conference Room [M]" />
-             <Picker.Item label="Swamis Coneference Room [L]" value="Swamis Coneference Room [L]" />
-          </Picker>
-
+          <View style={Style.inlineButton}>
+            <Picker style={Style.pickerContiner}
+                    selectedValue={this.state.room}
+                    onValueChange={(room_var) => this.setState({room: room_var})}>
+               <Picker.Item label="Choose a Room" value="none" />
+               <Picker.Item label="De Pree Coneference Room [S]" value="De Pree Coneference Room [S]" />
+               <Picker.Item label="Seaside Conference Room [M]" value="Seaside Conference Room [M]" />
+               <Picker.Item label="Swamis Coneference Room [L]" value="Swamis Coneference Room [L]" />
+            </Picker>
+            <TouchableHighlight
+              activeOpacity={0.9}
+              underlayColor={'white'}
+              onPress = {()=> this.renderTemperaturePhoton()}
+              >
+            <Text style={Style.checkButton}>✔</Text>
+        </TouchableHighlight>
+           
+          </View>
           <View>
              <Text style={Style.currentTemperatureHeaderText}>
                 {"Current Temperature"}
@@ -64,7 +75,7 @@ export default class MainPage extends Component {
                 {this.state.insideTempF + "        " + this.state.insideTempC}
              </Text>
              <Text style={Style.outsideTemperatureHeaderText}>
-                {"Outside Temperature"}
+                {this.state.city}
              </Text>
               <Text style={Style.temperatureText}> 
                   {this.state.outsideTempF + "        " + this.state.outsideTempC} 
@@ -87,14 +98,21 @@ export default class MainPage extends Component {
     }
   }
 
+  
+
   renderTemperaturePhoton() {
+    if(this.state.room == "Choose a Room"){
+      alert("changing")
+      this.state.insideTempF = "?";
+      this.state.insideTempC = "?";
+      return;
+    }
+
     var request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
       if (request.readyState == 4 ) {
-    
-          this.setState({insideTempF : JSON.parse(request.response)["TempF"]+"°F"});
-          this.setState({insideTempC : JSON.parse(request.response)["TempC"]+"°C"})
-        
+        this.setState({insideTempF : JSON.parse(request.response)["TempF"]+"°F"});
+        this.setState({insideTempC : JSON.parse(request.response)["TempC"]+"°C"})
       }
     };
     request.open('GET', 'http://fmtiotapi.azurewebsites.net/api/room/getlatest');
@@ -108,6 +126,7 @@ export default class MainPage extends Component {
         var tC = (JSON.parse(request.response)["main"]["temp"])-273.15;
         this.setState({outsideTempF : Math.round(tF)+"°F"});
         this.setState({outsideTempC : Math.round(tC)+"°C"});
+        this.setState({city : JSON.parse(request.response)["name"]});
       }
     };
     request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=Carlsbad&APPID=bbf44c86869ad7545bb2f3484ced8359');

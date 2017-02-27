@@ -26,10 +26,15 @@ var Style = StyleSheet.create({
 
     // Choose a room section
     pickerContiner: {
+        width: .85*(Dimensions.get("window").width),
         color: 'white',
         backgroundColor: '#23AFC9',
     },
-
+    checkButton:{
+        width: .15*(Dimensions.get("window").width),
+        color: 'white',
+        textAlign: 'center'
+    },
     // Temperature Label Section
     tempContainer: {
         flex: 7, 
@@ -109,6 +114,11 @@ var Style = StyleSheet.create({
       color: 'white',
    },
    temperatureButtonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'center'
+   },
+   inlineButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'center'
