@@ -20,7 +20,6 @@ import {
 
 // First Page
 export default class MainPage extends Component {
-  watchID = (null : ?number);
   state = {
     room: 'Choose a Room',
     insideTempF: '',
@@ -102,21 +101,21 @@ export default class MainPage extends Component {
 
   renderTemperaturePhoton() {
     if(this.state.room == "Choose a Room"){
-      alert("changing")
       this.state.insideTempF = "?";
       this.state.insideTempC = "?";
-      return;
     }
+    else{
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = (e) => {
 
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = (e) => {
-      if (request.readyState == 4 ) {
-        this.setState({insideTempF : JSON.parse(request.response)["TempF"]+"°F"});
-        this.setState({insideTempC : JSON.parse(request.response)["TempC"]+"°C"})
-      }
-    };
-    request.open('GET', 'http://fmtiotapi.azurewebsites.net/api/room/getlatest');
-    request.send();
+        if (request.readyState == 4 && request.status == 200) {
+          this.setState({insideTempF : JSON.parse(request.response)["TempF"]+"°F"});
+          this.setState({insideTempC : JSON.parse(request.response)["TempC"]+"°C"})
+        }
+      };
+      request.open('GET', 'http://fmtiotapi.azurewebsites.net/api/room/getlatest');
+      request.send();
+    }
   }
   renderTemperatureOutisde() {
     var request = new XMLHttpRequest();

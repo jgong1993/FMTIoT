@@ -3,10 +3,15 @@ import React, { Component } from 'react';
 // Style Sheets
 import Style from './src/Style';
 import NavigationStyle from './src/NavigationStyle';
+import TestStyle from './testStuff/src/TestStyle';
 
 // External parts to the page
 import MainPage from './MainPage'; // Main PAge
 import RequestContainer from './RequestContainer'; // Request page
+
+
+import TesMain from './testStuff/TesMain'; // Test page
+import SelectRoomPage from './testStuff/SelectRoomPage'; // Test page
 
 // Componenets
 import {
@@ -29,7 +34,7 @@ class IotTemperature extends Component {
   render() {
     return (
       <Navigator
-          initialRoute={{id: 'Home', name: 'Home'}}
+          initialRoute={{id: 'Test', name: 'Test'}}
           renderScene={this.renderScene}
           ref={(nav) => { navigator = nav; }}
           navigationBar = {
@@ -40,6 +45,13 @@ class IotTemperature extends Component {
     );
   }
   renderScene(route, navigator) {    
+    if (route.name == 'Test') {
+      return (
+        <TesMain
+          navigator={navigator} />
+      );
+    }
+
     if (route.name == 'Home') {
       return (
         <MainPage
@@ -50,6 +62,13 @@ class IotTemperature extends Component {
       return (
         <RequestContainer
           room = {route.room} 
+          navigator={navigator} />
+      );
+    }
+
+    if (route.name == 'OtherHome') {
+      return (
+        <SelectRoomPage
           navigator={navigator} />
       );
     }
@@ -83,11 +102,13 @@ var NavigationBarRouteMapper = {
          </Text> 
       )
     }else{
-      return (
-         <Text style = { NavigationStyle.title }>
-            {route.title} 
-         </Text>
-      )
+      if(route.title != "Rooms Available"){
+        return (
+           <Text style = { NavigationStyle.title }>
+              {route.title} 
+           </Text>
+        )
+      }
     }
    },
 }

@@ -4,7 +4,6 @@ var NavigationStyle = StyleSheet.create({
 
    title: {
       paddingVertical: 10,
-      marginLeft: 20,
       justifyContent: 'center',
       fontSize: 16,
       color: 'white',
@@ -37,7 +36,6 @@ var NavigationStyle = StyleSheet.create({
       margin: 10,
       fontSize: 19
    },
-   
 });
 
 export default NavigationStyle;

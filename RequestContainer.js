@@ -47,6 +47,9 @@ export default class RequestContainer extends Component {
       min: 50,
       initVal: 0
     };
+    
+  }
+  componentDidMount(){
     this.renderTemperaturePhoton();
     this.renderTemperatureOutisde();
   }
