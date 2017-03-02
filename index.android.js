@@ -12,6 +12,7 @@ import RequestContainer from './RequestContainer'; // Request page
 
 import TesMain from './testStuff/TesMain'; // Test page
 import SelectRoomPage from './testStuff/SelectRoomPage'; // Test page
+import RoomInformation from './testStuff/RoomInformation'; // Test page
 
 // Componenets
 import {
@@ -58,7 +59,7 @@ class IotTemperature extends Component {
           navigator={navigator} />
       );
     }
-    if (route.name == 'Request Change') {
+    if (route.name == 'Request Change' || route.name == 'Change Room Temperature') {
       return (
         <RequestContainer
           room = {route.room} 
@@ -72,12 +73,33 @@ class IotTemperature extends Component {
           navigator={navigator} />
       );
     }
+
+    if(route.name =='Room Information'){
+      return (
+        <RoomInformation
+          room = {route.room}
+          size = {route.size} 
+          navigator={navigator} />
+      );
+    }
   }
 } // End of IoTTemperature
 
 // Router to map navigation
 var NavigationBarRouteMapper = {
    LeftButton(route, navigator, index, navState) {
+    // if(route.name =='Room Information' && index > 0){
+    //   return (
+    //         <View style={TestStyle.roomInformationLeft}>
+    //           <TouchableOpacity
+    //              onPress = {() => { if (index > 0) { navigator.pop() } }}>
+    //              <Text style={TestStyle.roomInformationDateTopLeft}>
+    //                 {'Back'} 
+    //              </Text>
+    //           </TouchableOpacity>
+    //         </View>
+    //      )
+    // }
       // if(index > 0) {
       //    return (
       //       <View style={RequestStyle.LeftButtonBox}>
@@ -93,23 +115,24 @@ var NavigationBarRouteMapper = {
       // else { return null }
    },
    RightButton(route, navigator, index, navState) {
+    
    },
    Title(route, navigator, index, navState) {
-    if(route.title == 'Request'){
-      return (
-         <Text style = { NavigationStyle.title2 }>
-            {route.title + ': ' + route.room} 
-         </Text> 
-      )
-    }else{
-      if(route.title != "Rooms Available"){
-        return (
-           <Text style = { NavigationStyle.title }>
-              {route.title} 
-           </Text>
-        )
-      }
-    }
+    // if(route.title == 'Request'){
+    //   return (
+    //      <Text style = { NavigationStyle.title2 }>
+    //         {route.title + ': ' + route.room} 
+    //      </Text> 
+    //   )
+    // }else{
+    //   if(route.title != "Rooms Available"){
+    //     return (
+    //        <Text style = { NavigationStyle.title }>
+    //           {route.title} 
+    //        </Text>
+    //     )
+    //   }
+    // }
    },
 }
 

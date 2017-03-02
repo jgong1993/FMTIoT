@@ -27,9 +27,10 @@ export default class TesMain extends Component {
     return (
       <View style={TestStyle.rootContainer}>
 
-        <View style={TestStyle.displayContainer}>
-            <View style={TestStyle.subDisplay}>
-                  <Text style={TestStyle.headerText}> Select Type </Text>
+        <View style={TestStyle.testMainDisplayContainer}>
+            <View style={TestStyle.testSubDisplayContainer}>
+                  <Text style={TestStyle.testHeaderText}> FAKE LOGIN PAGE. </Text>
+                  <Text style={TestStyle.testHeaderText}> Please Select Type Below</Text>
             </View>
         </View>
 

@@ -22,14 +22,14 @@ var navigator;
 // First Page
 export default class SelectRoomPage extends Component {
   constructor(nav) {
-      super();
+      super(nav);
       navigator = nav;
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.state = {
          dataSource: ds.cloneWithRows([
-            ['De Pree', 'Small Conference Room'], ['Seaside', 'Medium Conference Room'], ['Cardiff', 'Medium Conference Room'],
-            ['Swamis', 'Big Conference Room'], ['De Pree 2', 'Small Conference Room'], ['Seaside 2', 'Medium Conference Room'], ['Cardiff 2', 'Medium Conference Room'],
-            ['Swamis 2', 'Big Conference Room']
+            ['De Pree', 'Small Conference Room', 78], ['Seaside', 'Medium Conference Room', 72], ['Cardiff', 'Medium Conference Room', 74],
+            ['Swamis', 'Big Conference Room', 99], ['De Pree 2', 'Small Conference Room', 78], ['Seaside 2', 'Medium Conference Room', 72], 
+            ['Cardiff 2', 'Medium Conference Room', 74], ['Swamis 2', 'Big Conference Room', 77]
          ])
 
       };
@@ -39,25 +39,26 @@ export default class SelectRoomPage extends Component {
     return (
       <View style={TestStyle.rootContainer}>
 
-        <View style={TestStyle.displayContainer2}>
-                  <Text style={TestStyle.headerText}> Available Rooms</Text>
+        <View style={TestStyle.selectRoomDisplayContainer}>
+                  <Text style={TestStyle.selectRoomheaderText}> Available Rooms</Text>
         </View>
 
-        <View style={TestStyle.subDisplay2}>
+        <View style={TestStyle.selectRoomSubDisplay}>
             <ListOfRooms navigator={navigator} dataSource={this.state.dataSource} selectRoom = {this.selectedRoom}/>
+            
         </View>
-
+        
       </View>
   );}
 
   selectedRoom = (x) => {
       this.props.navigator.push({
-       name: 'Request Change',
-       title: 'Request',
-       room: x[0] + ' Conference Room'
+       name: 'Room Information',
+       title: 'RoomInformation',
+       room: x[0],
+       size: x[1]
       });
   }
-
   getTodaysDate(){
     var weekday = new Array(7);
     weekday[0] =  "Sunday";
@@ -81,10 +82,9 @@ export default class SelectRoomPage extends Component {
     month[10] = "November";
     month[11] = "December";
     var today = new Date();
-    var date = weekday[today.getDay()]+' '+ month[(today.getMonth()+1)]+' '+today.getDate()+', ' + today.getYear();
+    var date = weekday[today.getDay()]+' '+ month[(today.getMonth()+1)]+' '+today.getDate()+', ' + today.getFullYear();
     return date;
   }
-
 }
 
 

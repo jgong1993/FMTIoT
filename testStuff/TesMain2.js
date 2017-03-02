@@ -11,7 +11,7 @@ export default TesMainButton = (props) => {
    return (
       <View>
           <Button
-            color= '#C3270B'
+            color= '#556B2F'
             title="Go to Test Page"
             accessibilityLabel="Go to Test Page"
             onPress = {props.requestChange}
