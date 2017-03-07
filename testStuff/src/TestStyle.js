@@ -26,7 +26,7 @@ var TestStyle = StyleSheet.create({
     // Select Room Page Stuff
     selectRoomDisplayContainer: {
         flex: .10,
-        backgroundColor: '#898BB4',
+        backgroundColor: '#6071DC',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -97,7 +97,7 @@ var TestStyle = StyleSheet.create({
    square: {
       width: .9*(Dimensions.get("window").width),
       height: 210,
-      backgroundColor: '#FF986C',
+      backgroundColor: '#6071DC',
    },
    //Bottom
    roomInformationSubDisplayBottom: {
@@ -111,7 +111,7 @@ var TestStyle = StyleSheet.create({
    },
    hotcoldTempButtonBox: {
      flex: .5,
-     width: .85*(Dimensions.get("window").width),
+     width: .9*(Dimensions.get("window").width),
      alignItems: 'center',
      justifyContent: 'center',
      borderWidth: 1,
@@ -120,9 +120,9 @@ var TestStyle = StyleSheet.create({
      marginBottom: 40
    },
    adjustTempButtonText:{
-    fontSize: 16,
+    fontSize: 15,
     color: 'black',
-    fontFamily: 'quicksand-bold'
+    fontFamily: 'quicksand'
    }
     
 });

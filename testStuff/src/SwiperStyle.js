@@ -15,7 +15,8 @@ var SwiperStyle = StyleSheet.create({
 	slideTextTitle: {
 		color: '#fff',
 	    fontSize: 35,
-	    fontFamily: 'quicksand'
+	    fontFamily: 'quicksand',
+	    
 	}
 	
 

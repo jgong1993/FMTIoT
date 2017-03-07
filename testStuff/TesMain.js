@@ -14,7 +14,8 @@ import {
   Picker,
   Button,
   Alert,
-  TouchableHighlight
+  TouchableHighlight,
+  StatusBar
 } from 'react-native';
 
 // First Page
@@ -26,7 +27,7 @@ export default class TesMain extends Component {
   render() {
     return (
       <View style={TestStyle.rootContainer}>
-
+        <StatusBar hidden={true}/>
         <View style={TestStyle.testMainDisplayContainer}>
             <View style={TestStyle.testSubDisplayContainer}>
                   <Text style={TestStyle.testHeaderText}> FAKE LOGIN PAGE. </Text>
@@ -38,11 +39,12 @@ export default class TesMain extends Component {
         <SelectRoomButton requestChange = {this.requestChangeToMain} />
       </View>
   );}
+
  requestChangeToTest = () => {
-      this.props.navigator.push({
-       name: 'OtherHome',
-       title: 'Rooms Available',
-      });
+    this.props.navigator.push({
+     name: 'Splash',
+     title: 'Splash Main',
+    });
   }
  requestChangeToMain = () => {
       this.props.navigator.push({

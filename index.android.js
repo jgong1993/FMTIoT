@@ -13,7 +13,7 @@ import RequestContainer from './RequestContainer'; // Request page
 import TesMain from './testStuff/TesMain'; // Test page
 import SelectRoomPage from './testStuff/SelectRoomPage'; // Test page
 import RoomInformation from './testStuff/RoomInformation'; // Test page
-
+import SplashMain from './testStuff/SplashMain';
 // Componenets
 import {
   AppRegistry,
@@ -45,7 +45,14 @@ class IotTemperature extends Component {
             }/>
     );
   }
-  renderScene(route, navigator) {    
+  renderScene(route, navigator) { 
+    if (route.name == 'Splash') {
+      return (
+        <SplashMain
+          navigator={navigator} />
+      );
+    }
+
     if (route.name == 'Test') {
       return (
         <TesMain
@@ -84,6 +91,15 @@ class IotTemperature extends Component {
     }
   }
 } // End of IoTTemperature
+
+// Backbutton event listener
+BackAndroid.addEventListener('hardwareBackPress', () => {
+    if (navigator && navigator.getCurrentRoutes().length > 1) {
+        navigator.pop();
+        return true;
+    }
+    return false;
+});
 
 // Router to map navigation
 var NavigationBarRouteMapper = {
@@ -136,13 +152,5 @@ var NavigationBarRouteMapper = {
    },
 }
 
-// Backbutton event listener
-BackAndroid.addEventListener('hardwareBackPress', () => {
-    if (navigator && navigator.getCurrentRoutes().length > 1) {
-        navigator.pop();
-        return true;
-    }
-    return false;
-});
 
 AppRegistry.registerComponent('IotTemperature', () => IotTemperature);
