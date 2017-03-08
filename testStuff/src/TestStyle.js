@@ -26,22 +26,23 @@ var TestStyle = StyleSheet.create({
     // Select Room Page Stuff
     selectRoomDisplayContainer: {
         flex: .10,
-        backgroundColor: '#6071DC',
-        alignItems: 'center',
+        backgroundColor: '#5A2635',
+        alignItems: 'flex-start',
         justifyContent: 'center',
     },
 
     selectRoomheaderText: {
         fontSize: 20,
         color: 'white',
-        fontFamily: 'quicksand'
+        fontFamily: 'quicksand',
+        marginLeft: 20
     },
 
     selectRoomSubDisplay: {
         flex: .90,
         backgroundColor: '#FFF7FF',
-        width: .96*(Dimensions.get("window").width),
-        marginLeft: ((Dimensions.get("window").width)-.96*(Dimensions.get("window").width))/2
+        width: (Dimensions.get("window").width),
+        //marginLeft: ((Dimensions.get("window").width)-.98*(Dimensions.get("window").width))/2
     },
 
 
@@ -77,9 +78,8 @@ var TestStyle = StyleSheet.create({
    },
     //Middle
     roomInformationSubDisplayMiddle: {
-      flex: .4,
+      flex: .5,
       alignItems: 'center',
-      justifyContent: 'center',
       backgroundColor: '#FFF7FF',
     },
     
@@ -91,39 +91,46 @@ var TestStyle = StyleSheet.create({
     roomInformationRoomSize:{
       fontSize: 20,
       color: 'white',
-      marginBottom: 10,
+      marginBottom: 15,
       fontFamily: 'quicksand'
     },
    square: {
       width: .9*(Dimensions.get("window").width),
-      height: 210,
-      backgroundColor: '#6071DC',
+      height: 240,
+      backgroundColor: '#5A2635',
+      marginTop: ((Dimensions.get("window").width)-(.9*(Dimensions.get("window").width)))/2
    },
    //Bottom
    roomInformationSubDisplayBottom: {
-      flex: .2,
-      backgroundColor: '#FFF7FF',
+      flex: .1,
       alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#FFF7FF'
    },
-   hotcold:{
-      flex: .5,
-      alignItems: 'center',
+   hotcold: {
+      flex: .4,
    },
    hotcoldTempButtonBox: {
-     flex: .5,
+     flex: .6,
      width: .9*(Dimensions.get("window").width),
      alignItems: 'center',
      justifyContent: 'center',
-     borderWidth: 1,
-     borderColor: 'black',
-     borderRadius: 5,
-     marginBottom: 40
    },
    adjustTempButtonText:{
-    fontSize: 15,
-    color: 'black',
-    fontFamily: 'quicksand'
-   }
+    fontSize: 14,
+    color: '#5A2635',
+    fontFamily: 'quicksand-bold'
+   },
+   button: {
+        width: .8*Dimensions.get("window").width,
+        height: 40,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    button2: {
+        marginTop: 10,
+    },
     
 });
 

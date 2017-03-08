@@ -18,16 +18,16 @@ import {
   TouchableOpacity,
   ListView
 } from 'react-native';
-// First Page
+
 export default class SelectRoomPage extends Component {
   constructor() {
       super();
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
       this.state = {
          dataSource: ds.cloneWithRows([
-            ['De Pree', 'Small Conference Room', 78], ['Seaside', 'Medium Conference Room', 72], ['Cardiff', 'Medium Conference Room', 74],
-            ['Swamis', 'Big Conference Room', 99], ['De Pree 2', 'Small Conference Room', 78], ['Seaside 2', 'Medium Conference Room', 72], 
-            ['Cardiff 2', 'Medium Conference Room', 74], ['Swamis 2', 'Big Conference Room', 77]
+            ['De Pree', 'Small Conference Room', 78, '1'], ['Seaside', 'Medium Conference Room', 72, '2'], ['Cardiff', 'Medium Conference Room', 74, '3'],
+            ['Swamis', 'Big Conference Room', 99, '4'], ['De Pree 2', 'Small Conference Room', 78, '1'], ['Seaside 2', 'Medium Conference Room', 72, '2'], 
+            ['Cardiff 2', 'Medium Conference Room', 74, '3'], ['Swamis 2', 'Big Conference Room', 77, '4']
          ])
 
       };
@@ -53,7 +53,8 @@ export default class SelectRoomPage extends Component {
        name: 'Room Information',
        title: 'RoomInformation',
        room: x[0],
-       size: x[1]
+       size: x[1],
+       roomImage: x[3],
       });
   }
 }

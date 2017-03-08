@@ -12,12 +12,41 @@ var ModalStyle = StyleSheet.create({
     	flex: .63,
     	backgroundColor: '#FFF7FF'
     },
-    backAndConfirmBox: {
-    	flex: .15,
-    	backgroundColor: '#FFF7FF',
+    otherTemperatureContainerColumn:{
+    	width: (Dimensions.get("window").width)/3,
+    	alignItems: 'center',
+    	marginTop: 15
     },
+    otherTemperatureContainerColumn2:{
+    	width: (Dimensions.get("window").width)/3,
+    	alignItems: 'center',
+    	justifyContent: 'center'
+    },
+    otherTemperatureContainerRow:{
+    	flex:.1,
+		flexDirection: 'row',
+    },
+    otherTemperatureContainerRow2:{
+    	flex:.2,
+		flexDirection: 'row',
+    },
+    firstLabel: {
+    	fontFamily: 'quicksand',
+     	fontSize: 15,
+    },
+    label:{
+    	fontFamily: 'quicksand',
+     	fontSize: 25,
+    },
+
+    // titleLabel: {
+    // 	fontFamily: 'quicksand',
+    // 	fontSize: 15,
+    // 	textDecorationLine: 'underline'
+
+    // },
     circleContainer : {
-    	flex: .9,
+    	flex: .7,
     	flexDirection: 'row',
     	alignItems: 'flex-start',
     	marginTop: 15,
@@ -33,28 +62,22 @@ var ModalStyle = StyleSheet.create({
     	fontSize: 40,
     	position: 'absolute',
     	top: 52,
-    	left: 50,
+    	left: 39,
     },
     dualButtons: {
-    	alignItems: 'flex-start',
+    	alignItems: 'center',
     	flex: .9
     },
     raiseTempButton: {
     	marginTop: 30,
     	marginRight: 10,
-    	width: .45*(Dimensions.get("window").width)
+    	width: .43*(Dimensions.get("window").width)
     },
     dropTempButton: {
     	marginTop: 20,
     	marginRight: 10,
-    	width: .45*(Dimensions.get("window").width)
+    	width: .43*(Dimensions.get("window").width)
     },
-
-    textInputContainer: {
-    	flex: .1,
-    	alignItems: 'center',
-    }
-
 });
 
 export default ModalStyle;

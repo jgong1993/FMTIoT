@@ -3,15 +3,15 @@ import { StyleSheet, Dimensions } from 'react-native';
 var ListOfRoomsStyle = StyleSheet.create({
 
 listContainer: {
-      marginTop: 5,
-      marginBottom: 5,
+      //marginTop: 2.5,
+      //marginBottom: 2.5,
       width: Dimensions.get("window").width,
-      height: 170,
+      height: 172
    },
    listItem: {
       flex: 1,
       flexDirection: 'row',
-      backgroundColor: 'rgba(0,0,0,.65)'
+      backgroundColor: 'rgba(0,0,0,.55)'
    },
    test1: {
       fontSize: 25,
@@ -42,6 +42,7 @@ listContainer: {
    circle: {
 	  justifyContent: 'center',
 	  alignItems: 'center',
+     marginLeft: 30,
 	  width: 45,
 	  height: 45,	
 	  borderRadius: 100/2,

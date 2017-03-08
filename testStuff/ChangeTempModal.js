@@ -7,18 +7,16 @@ import {
    Image,
    Modal,
    ScrollView,
-   StatusBar,
-   Button,
    NetInfo,
    Alert,
-   Dimensions
+   Button,
+   Dimensions,
+   ProgressBar 
 
 } from 'react-native'
 
 import ModalStyle from './src/ModalStyle';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import TextField from 'react-native-md-textinput';
-
 
 export default ChangeTempModal = (props) => {
    return (
@@ -27,21 +25,43 @@ export default ChangeTempModal = (props) => {
             <View style={ModalStyle.top}> 
             </View>
             <View style={ModalStyle.bottom}>
+              <View style={ModalStyle.otherTemperatureContainerRow}>
+                  <View style={ModalStyle.otherTemperatureContainerColumn}>
+                      <Text style={ModalStyle.firstLabel}> {"Current"} </Text>
+                  </View>
+                  <View style={ModalStyle.otherTemperatureContainerColumn}>
+                      <Text style={ModalStyle.firstLabel}> {"Average"} </Text>
+                  </View>
+                  <View style={ModalStyle.otherTemperatureContainerColumn}>
+                      <Text style={ModalStyle.firstLabel}> {"Carlsbad"} </Text>
+                  </View>
+              </View>
+              <View style={ModalStyle.otherTemperatureContainerRow2}>
+                  <View style={ModalStyle.otherTemperatureContainerColumn2}>
+                      <Text style={ModalStyle.label}> {"70F"} </Text>
+                  </View>
+                  <View style={ModalStyle.otherTemperatureContainerColumn2}>
+                      <Text style={ModalStyle.label}> {"73F"} </Text>
+                  </View>
+                  <View style={ModalStyle.otherTemperatureContainerColumn2}>
+                      <Text style={ModalStyle.label}> {"78F"} </Text>
+                  </View>
+              </View>
                <ScrollView>
                   <View style={ModalStyle.circleContainer}>
                     <View style={ModalStyle.progressCircle}>
                        <AnimatedCircularProgress
                          size={150}
-                         width={20}
-                         style={{marginLeft: 15}}
+                         width={16}
+                         style={{marginLeft: 20}}
                          fill={props.tempF}
-                         tintColor="#70C1B3"
+                         tintColor="#81bec3"
                          rotation = {0}
-                         backgroundColor="#B2DBBF">
+                         backgroundColor="#ebf1f1">
                          {
                            (fill) => (
                              <Text style={ModalStyle.insideCircleText}>
-                               {props.tempF}
+                               {props.tempF + 'F'}
                              </Text>
                            )
                          }
@@ -67,9 +87,6 @@ export default ChangeTempModal = (props) => {
                           </View>
                        </View>
                     </View>
-                  </View>
-                  <View style={ModalStyle.textInputContainer}>
-                    <TextField onChangeText={(text) => props.setMessage(text)} style={{width: .8*(Dimensions.get("window").width)}} label={'Comment'} highlightColor={'#00BCD4'} />
                   </View>
                </ScrollView>
             </View>

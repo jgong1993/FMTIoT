@@ -19,7 +19,7 @@ var SplashStyle = StyleSheet.create({
     title: {
         color: 'white',
         fontFamily: 'quicksand-bold',
-        fontSize:45,
+        fontSize:40,
         marginTop: .3*Dimensions.get("window").height,
         borderColor: 'white',
         borderWidth: 2,

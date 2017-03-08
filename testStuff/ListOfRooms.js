@@ -14,8 +14,8 @@ import {
 // Style Sheets
 import ListOfRoomsStyle from './src/ListOfRoomsStyle';
 
-var index = 0;
-const iconsMap = {'0': require('./pic/1.jpg'), '1': require('./pic/2.jpg'), '2': require('./pic/3.jpg'), '3': require('./pic/4.jpg')};
+var index = 1;
+const iconsMap = {'1': require('./pic/1.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
 
 export default ListOfRooms = (props) => {
    return (
@@ -27,7 +27,7 @@ export default ListOfRooms = (props) => {
                   <TouchableHighlight onPress={()=>{props.selectRoom(rowData)}}>
                      <Image
                       style={ListOfRoomsStyle.listContainer}
-                      source={iconsMap[(((index+1)==3)?index=0:index+=1).toString()]}
+                      source={iconsMap[rowData[3]]}
                      >
                         <View style={ListOfRoomsStyle.listItem}>
                            <View style={ListOfRoomsStyle.left}>
@@ -53,3 +53,4 @@ export default ListOfRooms = (props) => {
       </View>
    )
 }
+

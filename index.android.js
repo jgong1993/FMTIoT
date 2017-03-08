@@ -86,6 +86,7 @@ class IotTemperature extends Component {
         <RoomInformation
           room = {route.room}
           size = {route.size} 
+          roomImage = {route.roomImage}
           navigator={navigator} />
       );
     }

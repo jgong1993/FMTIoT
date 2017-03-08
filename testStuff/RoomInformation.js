@@ -23,12 +23,14 @@ import {
   ActivityIndicator
 } from 'react-native';
 
+const iconsMap = {'1': require('./pic/1.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
+
 export default class RoomInformation extends Component {
   constructor() {
       super();
       this.state = {
         isModalOpen: false,
-        tempF: 60,
+        tempF: 70,
         animating: true,
         activityIndHeight: 80,
         message : ''
@@ -44,7 +46,7 @@ export default class RoomInformation extends Component {
             <View style={TestStyle.roomInformationSubDisplayTop}>
                 <Image
                       style={TestStyle.roomInformationTopImage}
-                      source={require('./pic/2.jpg')}>
+                      source={iconsMap[this.props.roomImage]}>
                    <View style={[TestStyle.roomInformationTopImage, TestStyle.roomInformationTopImageOverlay]}>
                        <Text style={TestStyle.roomInformationRoomName}> {this.props.room} </Text>
                        <Text style={TestStyle.roomInformationRoomSize}> {this.props.size} </Text>
@@ -54,10 +56,10 @@ export default class RoomInformation extends Component {
             <View style={TestStyle.roomInformationSubDisplayMiddle}>
                 <View style={TestStyle.square}>
                    <Swiper dotColor = {'white'} 
-                         activeDotColor = {'#ea665b'} 
+                         activeDotColor = {'#3C5925'} 
                          autoplay = {true} 
                          autoplayTimeout = {5} 
-                         height = {210}
+                         height = {240}
                          width = {.9*(Dimensions.get("window").width)}
                          showsButtons={false}>
                         <View style={SwiperStyle.slide}>
@@ -91,18 +93,19 @@ export default class RoomInformation extends Component {
                 </View>
             </View>
             <View style={TestStyle.roomInformationSubDisplayBottom}>
-                <View style={TestStyle.hotcold}></View>
                 <View style={TestStyle.hotcoldTempButtonBox}>
-                  <TouchableHighlight onPress ={()=>{this.openModal()}} underlayColor={ 'transparent' }>
+                  <TouchableHighlight style={[TestStyle.button, TestStyle.button2]} onPress ={()=>{this.openModal()}}>
                     <Text style={TestStyle.adjustTempButtonText}> {"Suggest a new temperature for " + this.props.room}</Text>
                   </TouchableHighlight>
                 </View>
+                <View style={TestStyle.hotcold}></View>
             </View>
             <ChangeTempModal visibility = {this.state.isModalOpen} 
                              openModal = {this.openModal} 
                              closeModal = {this.closeModal}
                              tempF = {this.state.tempF}
                              requestTempChange = {this.requestTempChange}
+                             message = {this.state.message}
                              setMessage = {this.setMessage}
                               />
         </View>
