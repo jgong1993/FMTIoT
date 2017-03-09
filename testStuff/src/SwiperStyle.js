@@ -8,15 +8,15 @@ var SwiperStyle = StyleSheet.create({
 	    alignItems: 'center',
   	},
   	slideText: {
-	  	color: '#fff',
+	  	color: 'white',
 	    fontSize: 65,
 	    fontFamily: 'quicksand'
 	},
 	slideTextTitle: {
-		color: '#fff',
+		color: 'white',
 	    fontSize: 35,
 	    fontFamily: 'quicksand',
-	    
+	    marginBottom: 20
 	}
 	
 
