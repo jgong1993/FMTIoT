@@ -55,7 +55,7 @@ export default ChangeTempModal = (props) => {
                   <View style={ModalStyle.circleContainer}>
                     <View style={ModalStyle.progressCircle}>
                        <AnimatedCircularProgress
-                         size={150}
+                         size={140}
                          width={16}
                          style={{marginLeft: 20}}
                          fill={props.tempF}
@@ -99,7 +99,7 @@ export default ChangeTempModal = (props) => {
                       onPress ={()=>{
                            Alert.alert(
                             'Confirmation',
-                            "Are you sure you want to set the temperature to " + props.tempF +"F",
+                            "Are you sure you want to set the temperature to " + props.tempF +"F?",
                             [
                              {text: 'Cancel'},  
                              {text: 'Send', onPress: () => {props.sendMessage()}},

@@ -44,17 +44,17 @@ var ModalStyle = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	progressCircle: {
-		flex: .5,
+		flex: .4,
 	},
 	dualButtonContainer: {
-		flex: .5,
+		flex: .6,
 	},
 	insideCircleText: {
 		fontFamily: 'quicksand',
 		fontSize: 40,
 		position: 'absolute',
-		top: 52,
-		left: 39,
+		top: 47,
+		left: 34,
 	},
 	dualButtons: {
 		alignItems: 'center',
@@ -62,13 +62,11 @@ var ModalStyle = StyleSheet.create({
 	},
 	raiseTempButton: {
 		marginTop: 30,
-		marginRight: 10,
-		width: .43*(Dimensions.get("window").width)
+		width: .45*(Dimensions.get("window").width)
 	},
 	dropTempButton: {
 		marginTop: 20,
-		marginRight: 10,
-		width: .43*(Dimensions.get("window").width)
+		width: .45*(Dimensions.get("window").width)
 	},
 	bottomButtonContainer:{
 		flex: .20,

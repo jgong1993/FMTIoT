@@ -48,18 +48,9 @@ var TestStyle = StyleSheet.create({
 
     // Room Information Stuff
     // Top
-    roomInformationDisplay: {
-        flex: .10,
-        backgroundColor: '#f8f8fa',
-    },
-    roomInformationDisplayContainer: {
-        flex: .5,
-      flexDirection: 'row',
-      backgroundColor: 'white',
-    },
     roomInformationSubDisplay: {
       flex: .90,
-      backgroundColor: '#f8f8fa',
+      backgroundColor: '#FFF7FF',
     },
     roomInformationSubDisplayTop: {
       flex: .55,
@@ -99,7 +90,6 @@ var TestStyle = StyleSheet.create({
    square: {
       width: .9*(Dimensions.get("window").width),
       height: 230,
-      backgroundColor: '#5A2635',
      // marginTop: ((Dimensions.get("window").width)-(.9*(Dimensions.get("window").width)))/2
    },
    //Bottom

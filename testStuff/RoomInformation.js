@@ -8,6 +8,7 @@ import SwiperStyle from './src/SwiperStyle';
 import Swiper from 'react-native-swiper';
 import ChangeTempModal from './ChangeTempModal'
 
+
 // Components
 import { 
   View, 
@@ -36,7 +37,7 @@ export default class RoomInformation extends Component {
         animating: true,
         activityIndHeight: 80,
         message : '',
-        arrowColor: '#5A2635'
+        arrowColor: 'white'
 
       };
       this.renderTemperaturePhoton();
@@ -55,7 +56,9 @@ export default class RoomInformation extends Component {
                        <Text style={TestStyle.roomInformationRoomName}> {this.props.room} </Text>
                        <Text style={TestStyle.roomInformationRoomSize}> {this.props.size} </Text>
                    </View>
+
                 </Image>
+
             </View>
             <View style={TestStyle.roomInformationSubDisplayMiddle}>
 
@@ -63,12 +66,11 @@ export default class RoomInformation extends Component {
                   </View>
 
                 <View style={TestStyle.square}>
-                   <Swiper dotColor = {'gray'} 
-                         activeDotColor = {'#3C5925'} 
+                   <Swiper dotColor = {'grey'} 
+                         activeDotColor = {'#5A2635'} 
                          autoplay = {true} 
                          autoplayTimeout = {5} 
                          height = {230}
-                         showsPagination={false}
                          width = {.9*(Dimensions.get("window").width)}
                          prevButton = {
                           <Text style={{fontSize: 20, color: this.state.arrowColor}}>‹</Text>
@@ -182,7 +184,7 @@ export default class RoomInformation extends Component {
           this.setState({initVal: JSON.parse(request.response)["TempF"]});
           this.setState({animating: false});
           this.setState({activityIndHeight: 0});
-          this.setState({arrowColor: 'white'})
+          this.setState({arrowColor: '#5A2635'})
         }
       }
   };
