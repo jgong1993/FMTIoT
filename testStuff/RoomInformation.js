@@ -21,7 +21,8 @@ import {
   TouchableHighlight,
   Dimensions,
   Modal,
-  ActivityIndicator
+  ActivityIndicator,
+  StatusBar
 } from 'react-native';
 
 const iconsMap = {'1': require('./pic/1.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
@@ -34,13 +35,16 @@ export default class RoomInformation extends Component {
       this.state = {
         isModalOpen: false,
         tempF: 70,
+        currentF: 70,
         animating: true,
         activityIndHeight: 80,
         message : '',
-        arrowColor: 'white'
+        arrowColor: 'white',
+        outsideTempF: ''
 
       };
       this.renderTemperaturePhoton();
+      this.renderTemperatureOutisde();
   }
 
 
@@ -110,6 +114,7 @@ export default class RoomInformation extends Component {
                 </View>
             </View>
             <View style={TestStyle.roomInformationSubDisplayBottom}>
+            <StatusBar hidden />
                 <View style={TestStyle.hotcoldTempButtonBox}>
                   <TouchableHighlight underlayColor={'transparent'} style={[TestStyle.button, TestStyle.button2]} onPress ={()=>{this.openModal()}}>
                     <Text style={TestStyle.adjustTempButtonText}> {"Suggest A New Temperature"}</Text>
@@ -125,6 +130,8 @@ export default class RoomInformation extends Component {
                              message = {this.state.message}
                              setMessage = {this.setMessage}
                              sendMessage = {this.sendMessage}
+                             currentF = {this.state.currentF}
+                             outsideTempF = {this.state.outsideTempF}
                               />
         </View>
       </View>
@@ -179,6 +186,8 @@ export default class RoomInformation extends Component {
           this.setState({valueToSet: "No data "});
         }else{
           this.setState({insideTempF : JSON.parse(request.response)["TempF"]});
+          this.setState({tempF : parseInt(JSON.parse(request.response)["TempF"])});
+          this.setState({currentF : parseInt(JSON.parse(request.response)["TempF"])});
           this.setState({insideTempC : JSON.parse(request.response)["TempC"]});
           this.setState({valueToSet: JSON.parse(request.response)["TempF"]+"°F"});
           this.setState({initVal: JSON.parse(request.response)["TempF"]});
@@ -191,6 +200,21 @@ export default class RoomInformation extends Component {
     await request.open('GET', 'http://fmtiotapi.azurewebsites.net/api/room/getlatest');
     await request.send();
   }
+
+  renderTemperatureOutisde() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = (e) => {
+      if (request.readyState == 4 ) {
+        var tF = (JSON.parse(request.response)["main"]["temp"])*(9/5)-459.67;
+        var tC = (JSON.parse(request.response)["main"]["temp"])-273.15;
+        this.setState({outsideTempF : Math.round(tF)+"°F"});
+        //this.setState({outsideTempC : Math.round(tC)+"°C"});
+      }
+    };
+    request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=Carlsbad&APPID=bbf44c86869ad7545bb2f3484ced8359');
+    request.send();
+  }
+
 
 }
 

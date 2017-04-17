@@ -17,7 +17,8 @@ import {
   Button,
   TouchableHighlight,
   Alert,
-  Image
+  Image,
+  StatusBar
 } from 'react-native';
 
 // First Page
@@ -29,6 +30,7 @@ export default class SplashMain extends Component {
   render() {
     return (
       <View style={SplashStyle.rootContainer}>
+        <StatusBar hidden />
         <Image
             style={SplashStyle.backgroundImage}
             source={require('./pic/back.jpg')}>

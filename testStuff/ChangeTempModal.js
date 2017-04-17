@@ -12,8 +12,8 @@ import {
    Button,
    Dimensions,
    ProgressBar,
-   TouchableHighlight
-
+   TouchableHighlight,
+   StatusBar
 } from 'react-native'
 
 import ModalStyle from './src/ModalStyle';
@@ -40,13 +40,13 @@ export default ChangeTempModal = (props) => {
                 </View>
                 <View style={ModalStyle.otherTemperatureContainerRow2}>
                     <View style={ModalStyle.otherTemperatureContainerColumn2}>
-                        <Text style={ModalStyle.label}> {"70F"} </Text>
+                        <Text style={ModalStyle.label}> {props.currentF + 'F'} </Text>
                     </View>
                     <View style={ModalStyle.otherTemperatureContainerColumn2}>
                         <Text style={ModalStyle.label}> {"73F"} </Text>
                   </View>
                   <View style={ModalStyle.otherTemperatureContainerColumn2}>
-                      <Text style={ModalStyle.label}> {"78F"} </Text>
+                      <Text style={ModalStyle.label}> {props.outsideTempF} </Text>
                   </View>
                 </View>
               </View>

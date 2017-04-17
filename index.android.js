@@ -35,7 +35,7 @@ class IotTemperature extends Component {
   render() {
     return (
       <Navigator
-          initialRoute={{id: 'Test', name: 'Test'}}
+          initialRoute={{id: 'Splash', name: 'Splash'}}
           renderScene={this.renderScene}
           ref={(nav) => { navigator = nav; }}
           navigationBar = {
@@ -154,4 +154,4 @@ var NavigationBarRouteMapper = {
 }
 
 
-AppRegistry.registerComponent('IotTemperature', () => IotTemperature);
+AppRegistry.registerComponent('Smart Room', () => IotTemperature);
