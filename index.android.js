@@ -35,7 +35,7 @@ class IotTemperature extends Component {
   render() {
     return (
       <Navigator
-          initialRoute={{id: 'Splash', name: 'Splash'}}
+          initialRoute={{id: 'Test', name: 'Test'}}
           renderScene={this.renderScene}
           ref={(nav) => { navigator = nav; }}
           navigationBar = {
