@@ -25,7 +25,7 @@ import {
   StatusBar
 } from 'react-native';
 
-const iconsMap = {'1': require('./pic/1.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
+const iconsMap = {'1': require('./pic/5.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
 var info = require('../info.json');
 var base64 = require('base-64');
 
@@ -147,6 +147,9 @@ export default class RoomInformation extends Component {
     this.setState({isModalOpen: false});
   }
   requestTempChange = (x) => {
+    if(x > 100 || x < 1){
+        return;
+    }
     this.setState({tempF: x});
   }
   changeRoomTemperature(){

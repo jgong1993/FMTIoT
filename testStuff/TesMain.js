@@ -6,6 +6,10 @@ import TestStyle from './src/TestStyle';
 // External parts to the page
 import TesMainButton from './TesMain2'
 import SelectRoomButton from './SelectRoomButton'
+import ModalStyle from './src/ModalStyle';
+
+var info = require('./info.json');
+
 // Components
 import { 
   View, 
@@ -15,13 +19,17 @@ import {
   Button,
   Alert,
   TouchableHighlight,
-  StatusBar
+  StatusBar,
+  TextInput
 } from 'react-native';
 
 // First Page
 export default class TesMain extends Component {
   constructor() {
       super()
+      this.state = {
+        text: '',
+      }
   }
   
   render() {
@@ -30,21 +38,29 @@ export default class TesMain extends Component {
         <StatusBar hidden={true}/>
         <View style={TestStyle.testMainDisplayContainer}>
             <View style={TestStyle.testSubDisplayContainer}>
-                  <Text style={TestStyle.testHeaderText}> FAKE LOGIN PAGE. </Text>
-                  <Text style={TestStyle.testHeaderText}> Please Select Type Below</Text>
+                  <Text style={TestStyle.testHeaderText}> Password: </Text>
+                  <TextInput secureTextEntry = {true} 
+                             style={{width: 100}}
+                             onChangeText={(text) => this.setState({text})} 
+                             value={this.state.text} />
+                  <TouchableHighlight underlayColor={'transparent'} style={ModalStyle.button} 
+                      onPress ={()=>{
+                           this.requestChangeToTest();
+                  }}>
+                    <Text>{"Go"}</Text>
+                  </TouchableHighlight>
             </View>
         </View>
-
-        <TesMainButton requestChange = {this.requestChangeToTest} />
-        <SelectRoomButton requestChange = {this.requestChangeToMain} />
       </View>
   );}
 
  requestChangeToTest = () => {
-    this.props.navigator.push({
-     name: 'Splash',
-     title: 'Splash Main',
-    });
+    if(this.state.text == info[0]["sec"]){
+      this.props.navigator.push({
+       name: 'Splash',
+       title: 'Splash Main',
+      });
+    }
   }
  requestChangeToMain = () => {
       this.props.navigator.push({

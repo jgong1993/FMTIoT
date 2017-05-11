@@ -15,7 +15,7 @@ import {
 import ListOfRoomsStyle from './src/ListOfRoomsStyle';
 
 var index = 1;
-const iconsMap = {'1': require('./pic/1.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
+const iconsMap = {'1': require('./pic/5.jpg'), '2': require('./pic/2.jpg'), '3': require('./pic/3.jpg'), '4': require('./pic/4.jpg')};
 
 export default ListOfRooms = (props) => {
    return (
