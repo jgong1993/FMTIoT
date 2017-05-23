@@ -108,7 +108,7 @@ export default class RoomInformation extends Component {
                             size="large"
                           />
                           <Text style={SwiperStyle.slideTextTitle}>{"Humidity (%)"}</Text>
-                          <Text style={SwiperStyle.slideText}>{"55"}</Text>
+                          <Text style={SwiperStyle.slideText}>{this.state.insideHumid}</Text>
                         </View>
                   </Swiper>
                 </View>
@@ -166,7 +166,7 @@ export default class RoomInformation extends Component {
     var authInfo = info[0]["accountSid"] +":"+ info[0]["authToken"];
     authInfo = base64.encode(authInfo);
     var url = "https://api.twilio.com/2010-04-01/Accounts/"+info[0]["accountSid"]+"/Messages.json";
-    var params = "To=3233172423&From=+18187228141&Body=Can you set " +this.props.room +" to " + this.state.tempF + "F";
+    var params = "To=9496377148&From=+16195667660&Body=Can you set " +this.props.room +" to " + this.state.tempF + "F";
     http.open("POST", url, true);
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     http.setRequestHeader("Content-Length", "50");
@@ -189,6 +189,7 @@ export default class RoomInformation extends Component {
           this.setState({valueToSet: "No data "});
         }else{
           this.setState({insideTempF : JSON.parse(request.response)["TempF"]});
+          this.setState({insideHumid : JSON.parse(request.response)["Humid"]});
           this.setState({tempF : parseInt(JSON.parse(request.response)["TempF"])});
           this.setState({currentF : parseInt(JSON.parse(request.response)["TempF"])});
           this.setState({insideTempC : JSON.parse(request.response)["TempC"]});
